@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
 using PeliculasAPI.Entidades;
@@ -11,6 +13,7 @@ namespace PeliculasAPI.Controllers
 {
     [Route("api/generos")]
     [ApiController]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class GenerosController : ControllerBase
     {
         private readonly IRepositorio repositorio;
@@ -25,14 +28,15 @@ namespace PeliculasAPI.Controllers
         [HttpGet()] // api/generos
         [HttpGet("listado")] // api/generos/listado
         [HttpGet("/listadogeneros")] // /listadogeneros
-        public ActionResult<List<Genero>> GetGeneros()
+        //[ResponseCache(Duration =60)]
+        public ActionResult<List<Genero>> GetLista()
         {
             logger.LogInformation("vamos a mostrar los generos");
             return repositorio.obtenerTodosLosGeneros();
         }
 
         [HttpGet("{id:int}")] //  api/generos/2
-        public async Task<ActionResult<Genero>> Get(int Id, [FromHeader] string nombre)
+        public async Task<ActionResult<Genero>> GetById(int Id, [FromHeader] string nombre)
         {
             logger.LogDebug($"Obteniendo un genero por el id {Id}");
             var genero = await repositorio.ObtenerPorId(Id);

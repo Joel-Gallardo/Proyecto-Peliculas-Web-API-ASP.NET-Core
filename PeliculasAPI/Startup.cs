@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -29,6 +30,8 @@ namespace PeliculasAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
+            services.AddResponseCaching();
             services.AddTransient<IRepositorio, RepositorioEnMemoria>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -37,11 +40,12 @@ namespace PeliculasAPI
             });
         }
 
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
             ILogger<Startup> logger)
         {
-
+            /*
             //por convencion los middlewares que comiencen con Use no detienen el proceso
             //middleware para guardar por consola todas las respuestas http de la app
             app.Use(async (context, next) =>
@@ -74,6 +78,7 @@ namespace PeliculasAPI
                     await context.Response.WriteAsync("Estoy interceptando el pipeline");
                 });
             });
+            */
 
             if (env.IsDevelopment())
             {
@@ -85,6 +90,10 @@ namespace PeliculasAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseResponseCaching();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

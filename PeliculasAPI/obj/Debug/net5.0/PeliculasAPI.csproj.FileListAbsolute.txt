@@ -31,3 +31,10 @@ D:\Programming\Proyecto Peliculas Angular 12 y ASP.NET Core 5\Backend ASP.NET Co
 D:\Programming\Proyecto Peliculas Angular 12 y ASP.NET Core 5\Backend ASP.NET Core WEB API\PeliculasAPI\PeliculasAPI\obj\Debug\net5.0\PeliculasAPI.pdb
 D:\Programming\Proyecto Peliculas Angular 12 y ASP.NET Core 5\Backend ASP.NET Core WEB API\PeliculasAPI\PeliculasAPI\obj\Debug\net5.0\PeliculasAPI.genruntimeconfig.cache
 D:\Programming\Proyecto Peliculas Angular 12 y ASP.NET Core 5\Backend ASP.NET Core WEB API\PeliculasAPI\PeliculasAPI\obj\Debug\net5.0\ref\PeliculasAPI.dll
+D:\Programming\Proyecto Peliculas Angular 12 y ASP.NET Core 5\Backend ASP.NET Core WEB API\PeliculasAPI\PeliculasAPI\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Programming\Proyecto Peliculas Angular 12 y ASP.NET Core 5\Backend ASP.NET Core WEB API\PeliculasAPI\PeliculasAPI\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Programming\Proyecto Peliculas Angular 12 y ASP.NET Core 5\Backend ASP.NET Core WEB API\PeliculasAPI\PeliculasAPI\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+D:\Programming\Proyecto Peliculas Angular 12 y ASP.NET Core 5\Backend ASP.NET Core WEB API\PeliculasAPI\PeliculasAPI\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+D:\Programming\Proyecto Peliculas Angular 12 y ASP.NET Core 5\Backend ASP.NET Core WEB API\PeliculasAPI\PeliculasAPI\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Programming\Proyecto Peliculas Angular 12 y ASP.NET Core 5\Backend ASP.NET Core WEB API\PeliculasAPI\PeliculasAPI\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+D:\Programming\Proyecto Peliculas Angular 12 y ASP.NET Core 5\Backend ASP.NET Core WEB API\PeliculasAPI\PeliculasAPI\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
