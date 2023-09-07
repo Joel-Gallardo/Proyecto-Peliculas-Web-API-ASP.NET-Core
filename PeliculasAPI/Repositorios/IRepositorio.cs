@@ -1,11 +1,12 @@
 ﻿using PeliculasAPI.Entidades;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PeliculasAPI.Repositorios
 {
     public interface IRepositorio
     {
-        Genero ObtenerPorId(int id);
-        public List<Genero> obtenerTodosLosGeneros();
+        Task<Genero> ObtenerPorId(int id);
+        List<Genero> obtenerTodosLosGeneros();
     }
 }

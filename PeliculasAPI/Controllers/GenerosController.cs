@@ -1,12 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using PeliculasAPI.Entidades;
 using PeliculasAPI.Repositorios;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 namespace PeliculasAPI.Controllers
 {
     [Route("api/generos")]
-    public class GenerosController: ControllerBase
+    [ApiController]
+    public class GenerosController : ControllerBase
     {
         private readonly IRepositorio repositorio;
 
@@ -23,27 +27,28 @@ namespace PeliculasAPI.Controllers
             return repositorio.obtenerTodosLosGeneros();
         }
 
-        [HttpGet("{id:int}/{nombre=Joel}")] //  api/generos/2/Joel
-        public ActionResult<Genero> GetById(int Id, string nombre)
+        [HttpGet("{id:int}")] //  api/generos/2
+        public async Task<ActionResult<Genero>> Get(int Id, [FromHeader] string nombre)
         {
-            var genero = repositorio.ObtenerPorId(Id);
+
+            var genero = await repositorio.ObtenerPorId(Id);
 
             if (genero == null)
             {
                 return NotFound();
             }
-            
+
             return genero;
         }
 
         [HttpPost]
-        public ActionResult Post() 
+        public ActionResult Post([FromBody] Genero genero) 
         {
             return NoContent();
         }
 
         [HttpPut]
-        public ActionResult Put() 
+        public ActionResult Put([FromBody] Genero genero) 
         {
             return NoContent();
         }
