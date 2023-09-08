@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
 using PeliculasAPI.Entidades;
+using PeliculasAPI.Filtros;
 using PeliculasAPI.Repositorios;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
@@ -29,6 +31,7 @@ namespace PeliculasAPI.Controllers
         [HttpGet("listado")] // api/generos/listado
         [HttpGet("/listadogeneros")] // /listadogeneros
         //[ResponseCache(Duration =60)]
+        [ServiceFilter(typeof(MiFiltroDeAccion))]
         public ActionResult<List<Genero>> GetLista()
         {
             logger.LogInformation("vamos a mostrar los generos");
@@ -43,6 +46,7 @@ namespace PeliculasAPI.Controllers
 
             if (genero == null)
             {
+                throw new ApplicationException($"El genero de ID {Id} no fue encontrado");
                 logger.LogWarning($"No pudimos encontrar el genero de id {Id}");
                 return NotFound();
             }

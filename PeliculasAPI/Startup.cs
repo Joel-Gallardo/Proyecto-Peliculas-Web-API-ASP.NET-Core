@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using PeliculasAPI.Filtros;
 using PeliculasAPI.Repositorios;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,11 @@ namespace PeliculasAPI
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
             services.AddResponseCaching();
             services.AddTransient<IRepositorio, RepositorioEnMemoria>();
-            services.AddControllers();
+            services.AddTransient<MiFiltroDeAccion>();
+            services.AddControllers(options =>
+            {
+                options.Filters.Add(typeof(FiltroDeExcepcion));
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PeliculasAPI", Version = "v1" });
