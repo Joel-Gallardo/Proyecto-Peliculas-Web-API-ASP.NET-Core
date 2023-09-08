@@ -10,7 +10,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using PeliculasAPI.Filtros;
-using PeliculasAPI.Repositorios;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,9 +31,6 @@ namespace PeliculasAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
-            services.AddResponseCaching();
-            services.AddTransient<IRepositorio, RepositorioEnMemoria>();
-            services.AddTransient<MiFiltroDeAccion>();
             services.AddControllers(options =>
             {
                 options.Filters.Add(typeof(FiltroDeExcepcion));
@@ -47,43 +43,9 @@ namespace PeliculasAPI
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
-            ILogger<Startup> logger)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            /*
-            //por convencion los middlewares que comiencen con Use no detienen el proceso
-            //middleware para guardar por consola todas las respuestas http de la app
-            app.Use(async (context, next) =>
-            {
-                using (var swapStream = new MemoryStream())
-                {
-                    var respuestaOriginal = context.Response.Body;
-                    context.Response.Body = swapStream;
-
-                    await next.Invoke();
-
-                    swapStream.Seek(0, SeekOrigin.Begin);
-                    string respuesta = new StreamReader(swapStream).ReadToEnd();
-                    swapStream.Seek(0, SeekOrigin.Begin);
-
-                    await swapStream.CopyToAsync(respuestaOriginal);
-                    context.Response.Body = respuestaOriginal;
-
-                    logger.LogInformation(respuesta);
-                }
-            });
-
-            //creando un nuevo pipeline como un sub pipeline que se ejecuta solo cuando se intente acceder
-            //al endpoind /mapa1 y eso ejecutara el middleware que esta adentro que intercepta y termina la tuberia de procesos 
-            app.Map("/mapa1", (app) =>
-            {
-                //middleware que intercepta y termina la tuberia de procesos
-                app.Run(async context =>
-                {
-                    await context.Response.WriteAsync("Estoy interceptando el pipeline");
-                });
-            });
-            */
+      
 
             if (env.IsDevelopment())
             {
@@ -95,8 +57,6 @@ namespace PeliculasAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            app.UseResponseCaching();
 
             app.UseAuthentication();
 
